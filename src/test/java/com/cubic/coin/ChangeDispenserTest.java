@@ -8,27 +8,26 @@ import org.mockito.Mock;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static java.util.Arrays.asList;
+import static java.util.Collections.singletonList;
 import static org.mockito.Matchers.anyInt;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @RunWith(SpringRunner.class)
 public class ChangeDispenserTest {
 
     @Mock
-    DenominationsRetriever denominationsRetriever;
+    private DenominationsRetriever denominationsRetriever;
 
     @Mock
-    MonetaryItemDispenser monetaryItemDispenser;
+    private MonetaryItemDispenser monetaryItemDispenser;
 
     @InjectMocks
-    ChangeDispenser changeDispenser;
+    private ChangeDispenser changeDispenser;
 
 
     @Test
     public void shouldDispenseCoinsIfOnyOneCoinIsAvailable() throws Exception {
-        when(denominationsRetriever.getValidDenominations()).thenReturn(asList(1));
+        when(denominationsRetriever.getValidDenominations()).thenReturn(singletonList(1));
 
         changeDispenser.dispensesChange(3);
 
@@ -65,7 +64,7 @@ public class ChangeDispenserTest {
 
     @Test
     public void shouldDispenseNothing() throws Exception {
-        when(denominationsRetriever.getValidDenominations()).thenReturn(asList(1,2));
+        when(denominationsRetriever.getValidDenominations()).thenReturn(asList(1, 2));
 
         changeDispenser.dispensesChange(0);
         verify(monetaryItemDispenser, times(0)).dispense(anyInt());
