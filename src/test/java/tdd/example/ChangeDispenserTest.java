@@ -45,6 +45,17 @@ public class ChangeDispenserTest {
         verify(monetaryItemDispenser, times(1)).dispense(1);
     }
 
+    @Test
+    public void shouldDispenseCoinsIfTheDenominationsAreNotSorted() throws Exception {
+        when(denominationsRetriever.getValidDenominations()).thenReturn(asList(5, 1, 2));
+
+        changeDispenser.dispensesChange(8);
+
+        verify(monetaryItemDispenser, times(1)).dispense(5);
+        verify(monetaryItemDispenser, times(1)).dispense(2);
+        verify(monetaryItemDispenser, times(1)).dispense(1);
+    }
+
     @Test(expected = IllegalStateException.class)
     public void shouldThrowExceptionIfReturnIsNotPossible() throws Exception {
         when(denominationsRetriever.getValidDenominations()).thenReturn(asList(7, 13));
