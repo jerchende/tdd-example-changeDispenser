@@ -1,4 +1,4 @@
-package com.cubic.coin;
+package tdd.example;
 
 public interface MonetaryItemDispenser {
 
