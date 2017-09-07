@@ -77,4 +77,11 @@ public class ChangeDispenserTest {
         changeDispenser.dispensesChange(-5);
     }
 
+    @Test(expected = IllegalStateException.class)
+    public void shouldDispense50() throws Exception {
+        when(denominationsRetriever.getValidDenominations()).thenReturn(asList(100));
+
+        changeDispenser.dispensesChange(50);
+    }
+
 }
