@@ -1,16 +1,15 @@
 package com.cubic.coin;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import java.util.LinkedList;
 import java.util.List;
 
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class ChangeDispenser {
 
     private final DenominationsRetriever denominationsRetriever;
     private final MonetaryItemDispenser monetaryItemDispenser;
-
 
     public void dispensesChange(int amount) {
         if (amount < 0) throw new IllegalStateException("Negative Values not supported, bitch");
